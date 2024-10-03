@@ -10,15 +10,15 @@ import android.util.Log
 import android.widget.RadioButton
 import android.content.Intent
 import android.widget.Toast
-
+import androidx.core.content.ContextCompat.startActivity
+import android.content.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.testinversor)
-        // Inicializar vistas
+
         val etNombre = findViewById<EditText>(R.id.etNombre)
         val etApellido = findViewById<EditText>(R.id.etApellido)
         val etEmail = findViewById<EditText>(R.id.etEmail)
@@ -27,48 +27,45 @@ class MainActivity : AppCompatActivity() {
         val rgPregunta3 = findViewById<RadioGroup>(R.id.rgpregunta3)
         val btnContinuar = findViewById<Button>(R.id.btContinuar)
 
+        val datosInversor = getSharedPreferences("Inversiones", Context.MODE_PRIVATE)
+        val yaIngreso = datosInversor.getBoolean("estaIngresado", false)
+
+        if (yaIngreso) {
+            Toast.makeText(this, "OK! ", Toast.LENGTH_LONG).show()
+        }
+
         // Configurar botón "Continuar"
         btnContinuar.setOnClickListener {
+            val nombre = etNombre.text.toString()
+            val apellido = etApellido.text.toString()
 
+            val respuesta1 = findViewById<RadioButton>(rgPregunta1.checkedRadioButtonId)?.text
+            val respuesta2 = findViewById<RadioButton>(rgPregunta2.checkedRadioButtonId)?.text
+            val respuesta3 = findViewById<RadioButton>(rgPregunta3.checkedRadioButtonId)?.text
 
-            val etNombre = etNombre.text.toString()
-            val etApellido = etApellido.text.toString()
-            val etEmail = etEmail.text.toString()
-
-            // Obtener las respuestas seleccionadas
-            val respuesta1 = findViewById<RadioButton>(rgPregunta1.checkedRadioButtonId).text
-            val respuesta2 = findViewById<RadioButton>(rgPregunta2.checkedRadioButtonId).text
-            val respuesta3 = findViewById<RadioButton>(rgPregunta3.checkedRadioButtonId).text
-
-            val datosAlmacenados = getSharedPreferences("loginPref", Context.MODE_PRIVATE)
-            // Contar las respuestas seleccionadas
             val respuestasSeleccionadas = mutableListOf<String>().apply {
-                add(respuesta1.toString())
-                add(respuesta2.toString())
-                add(respuesta3.toString())
+                respuesta1?.let { add(it.toString()) }
+                respuesta2?.let { add(it.toString()) }
+                respuesta3?.let { add(it.toString()) }
             }
 
             // Crear mensaje de bienvenida
-            val mensaje = "Hola $etNombre $etApellido!\n"+
-            "Respuestas del Test del Inversor:\n" +
+            val mensaje = "Holaa $nombre $apellido!\n" +
+                    "Respuestas del Test del Inversor:\n" +
                     "1. $respuesta1\n" +
                     "2. $respuesta2\n" +
                     "3. $respuesta3\n" +
                     "Cantidad de Respuestas seleccionadas: ${respuestasSeleccionadas.size}"
-            val yaSeLogueo = datosAlmacenados.getBoolean("estaLogueado", false)
 
-            if (yaSeLogueo) {
-                Toast.makeText(this, "OK! ", Toast.LENGTH_LONG).show()
-            }
+            datosInversor.edit().putBoolean("estaIngresado", true).apply()
 
-            }
-
+            irAlHome()
         }
     }
-    private fun irAWelcomeActivity() {
-        val intent = Intent(this, WelcomeActivity::class.java)
-        startActivity(intent)
-        finish()
 
-    }
+                private fun irAlHome() {
+                    val intent = Intent(this, WelcomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
 }
