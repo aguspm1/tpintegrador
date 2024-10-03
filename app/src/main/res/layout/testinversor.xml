@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/main"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"/>
+
+        <EditText
+            android:id="@+id/etApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apellido"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo Electrónico"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tu edad se encuentra dentro del rango de:" />
+
+        <RadioGroup
+            android:id="@+id/rgpregunta1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A. Menos de 25 años"
+             />
+
+            <RadioButton
+                android:id="@+id/rbp1opcion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B. De 25 a 35 años."/>
+
+            <RadioButton
+                android:id="@+id/rbp1opcion3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C. De 36 a 55 años."/>
+
+            <RadioButton
+                android:id="@+id/rbp1opcion4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D. De 56 años o más."/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvpregunta2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Qué experiencia tenés como inversionista?" />
+
+        <RadioGroup
+            android:id="@+id/rgpregunta2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbp2opcion1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A. Ninguna"
+
+                />
+
+            <RadioButton
+                android:id="@+id/rbp2opcion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B. Baja." />
+
+            <RadioButton
+                android:id="@+id/rbp2opcion3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C. Media" />
+
+            <RadioButton
+                android:id="@+id/rbp2opcion4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D. Alta" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvpregunta3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cuánto tiempo conservarías esta inversión?" />
+
+        <RadioGroup
+            android:id="@+id/rgpregunta3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbp3opcion1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A. Menos de 180 días."
+                />
+
+            <RadioButton
+                android:id="@+id/rbp3opcion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B. Entre 180 días y 1 año."
+                />
+
+            <RadioButton
+                android:id="@+id/rbp3opcion3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C. De 1 a 2 años." />
+
+            <RadioButton
+                android:id="@+id/rbp3opcion4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D. Más de 2 años." />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btContinuar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:elevation="8dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"
+            android:padding="12dp"
+            android:layout_gravity="center"
+            android:text="Continuar" />
+    </LinearLayout>
+</ScrollView>
