@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
             val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
 
-            val mensaje = "Hola $nombre $apellido!\n sos un Inversor $tipoInversor"
+            val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
 
 
             datosInversor.edit().putBoolean("estaIngresado", true).apply()
