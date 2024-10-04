@@ -33,19 +33,22 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "OK! ", Toast.LENGTH_LONG).show()
         }
 
-        // Configurar botón "Continuar"
-        btnContinuar.setOnClickListener {
-            val nombre = findViewById<EditText>(R.id.etNombre).text.toString()
-            val apellido = findViewById<EditText>(R.id.etApellido).text.toString()
-            val email = findViewById<EditText>(R.id.etEmail).text.toString()
 
-            val respuesta1 = findViewById<RadioButton>(rgPregunta1.checkedRadioButtonId).text.toString()
-            val respuesta2 = findViewById<RadioButton>(rgPregunta2.checkedRadioButtonId).text.toString()
-            val respuesta3 = findViewById<RadioButton>(rgPregunta3.checkedRadioButtonId).text.toString()
+        btnContinuar.setOnClickListener {
+            val nombre = etNombre.text.toString()
+            val apellido = etApellido.text.toString()
+            val email = etEmail.text.toString()
+
+            val respuesta1 = getRespuesta(rgPregunta1.checkedRadioButtonId)
+            val respuesta2 = getRespuesta(rgPregunta2.checkedRadioButtonId)
+            val respuesta3 = getRespuesta(rgPregunta3.checkedRadioButtonId)
+
+            Log.d("Respuestas", "Respuesta 1: $respuesta1, Respuesta 2: $respuesta2, Respuesta 3: $respuesta3")
+
 
             val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
 
-            val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
+            val mensaje = "Hola $nombre $apellido!\n sos un Inversor $tipoInversor"
 
 
             datosInversor.edit().putBoolean("estaIngresado", true).apply()
@@ -53,15 +56,24 @@ class MainActivity : AppCompatActivity() {
             irAlHome(mensaje)
         }
     }
+    private fun getRespuesta(id: Int): String {
+        return when (id) {
+            R.id.rbp1opcion1, R.id.rbp2opcion1, R.id.rbp3opcion1 -> "A"
+            R.id.rbp1opcion2, R.id.rbp2opcion2, R.id.rbp3opcion2 -> "B"
+            R.id.rbp1opcion3, R.id.rbp2opcion3, R.id.rbp3opcion3 -> "C"
+            R.id.rbp1opcion4, R.id.rbp2opcion4, R.id.rbp3opcion4 -> "D"
+            else -> ""
+        }
+    }
 
-    private fun determinarTipo(respuesta1: String, respuesta2: String, respuesta3: String): String {
+        private fun determinarTipo(respuesta1: String, respuesta2: String, respuesta3: String): String {
         val respuestas = listOf(respuesta1, respuesta2, respuesta3)
         val conteoRespuestas = respuestas.groupingBy { it }.eachCount()
 
         return when {
-            conteoRespuestas.getOrDefault("a", 0) >= 2 -> "Conservador"
-            conteoRespuestas.getOrDefault("b", 0) >= 2 -> "Moderado"
-            conteoRespuestas.getOrDefault("c", 0) >= 2 -> "Agresivo"
+            conteoRespuestas.getOrDefault("A", 0) >= 2 -> "Conservador"
+            conteoRespuestas.getOrDefault("B", 0) >= 2 -> "Moderado"
+            conteoRespuestas.getOrDefault("B", 0) >= 2 -> "Agresivo"
             else -> "Diversificado"
         }
     }
