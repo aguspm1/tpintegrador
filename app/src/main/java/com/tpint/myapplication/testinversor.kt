@@ -1,5 +1,4 @@
 package com.tpint.myapplication
-
 import android.content.Context
 import android.os.Bundle
 import android.widget.Button
@@ -36,36 +35,41 @@ class MainActivity : AppCompatActivity() {
 
         // Configurar botón "Continuar"
         btnContinuar.setOnClickListener {
-            val nombre = etNombre.text.toString()
-            val apellido = etApellido.text.toString()
+            val nombre = findViewById<EditText>(R.id.etNombre).text.toString()
+            val apellido = findViewById<EditText>(R.id.etApellido).text.toString()
+            val email = findViewById<EditText>(R.id.etEmail).text.toString()
 
-            val respuesta1 = findViewById<RadioButton>(rgPregunta1.checkedRadioButtonId)?.text
-            val respuesta2 = findViewById<RadioButton>(rgPregunta2.checkedRadioButtonId)?.text
-            val respuesta3 = findViewById<RadioButton>(rgPregunta3.checkedRadioButtonId)?.text
+            val respuesta1 = findViewById<RadioButton>(rgPregunta1.checkedRadioButtonId).text.toString()
+            val respuesta2 = findViewById<RadioButton>(rgPregunta2.checkedRadioButtonId).text.toString()
+            val respuesta3 = findViewById<RadioButton>(rgPregunta3.checkedRadioButtonId).text.toString()
 
-            val respuestasSeleccionadas = mutableListOf<String>().apply {
-                respuesta1?.let { add(it.toString()) }
-                respuesta2?.let { add(it.toString()) }
-                respuesta3?.let { add(it.toString()) }
-            }
+            val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
 
-            // Crear mensaje de bienvenida
-            val mensaje = "Holaa $nombre $apellido!\n" +
-                    "Respuestas del Test del Inversor:\n" +
-                    "1. $respuesta1\n" +
-                    "2. $respuesta2\n" +
-                    "3. $respuesta3\n" +
-                    "Cantidad de Respuestas seleccionadas: ${respuestasSeleccionadas.size}"
+            val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
+
 
             datosInversor.edit().putBoolean("estaIngresado", true).apply()
 
-            irAlHome()
+            irAlHome(mensaje)
         }
     }
 
-                private fun irAlHome() {
-                    val intent = Intent(this, WelcomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+    private fun determinarTipo(respuesta1: String, respuesta2: String, respuesta3: String): String {
+        val respuestas = listOf(respuesta1, respuesta2, respuesta3)
+        val conteoRespuestas = respuestas.groupingBy { it }.eachCount()
+
+        return when {
+            conteoRespuestas.getOrDefault("a", 0) >= 2 -> "Conservador"
+            conteoRespuestas.getOrDefault("b", 0) >= 2 -> "Moderado"
+            conteoRespuestas.getOrDefault("c", 0) >= 2 -> "Agresivo"
+            else -> "Diversificado"
+        }
+    }
+
+    private fun irAlHome(mensaje: String) {
+        val intent = Intent(this, WelcomeActivity::class.java)
+        intent.putExtra("mensaje", mensaje)
+        startActivity(intent)
+        finish()
+    }
 }

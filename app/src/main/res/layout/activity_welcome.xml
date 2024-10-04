@@ -6,9 +6,27 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tvWelcomeMessage"
+        android:id="@+id/tvBienvenida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:padding="16dp" />
+        android:text="Hola"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Nueva Consulta" />
+
+    <Button
+        android:id="@+id/btnHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver Historial de Consultas" />
+
+    <Button
+        android:id="@+id/btnSalir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salir" />
 </LinearLayout>
