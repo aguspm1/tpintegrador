@@ -1,4 +1,5 @@
 package com.tpint.myapplication
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +7,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val yaIngreso = datosInversor.getBoolean("estaIngresado", false)
         val TermAceptados = datosInversor.getBoolean("YaAcepto", false)
 
+        Log.d("MainActivity", "TermAceptados: $TermAceptados")  // Log para verificar el valor de TermAceptados
         chbTyC.isChecked = TermAceptados
 
         if (yaIngreso) {
@@ -37,39 +38,48 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnContinuar.setOnClickListener {
-            if (!chbTyC.isChecked) {
-                Toast.makeText(
-                    this,
-                    "Debes aceptar los términos y condiciones para continuar",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                val nombre = etNombre.text.toString()
-                val apellido = etApellido.text.toString()
-                val email = etEmail.text.toString()
+            try {
+                if (!chbTyC.isChecked) {
+                    Toast.makeText(
+                        this,
+                        "Debes aceptar los términos y condiciones para continuar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    val nombre = etNombre.text.toString()
+                    val apellido = etApellido.text.toString()
+                    val email = etEmail.text.toString()
 
-                val respuesta1 = getRespuesta(rgPregunta1.checkedRadioButtonId)
-                val respuesta2 = getRespuesta(rgPregunta2.checkedRadioButtonId)
-                val respuesta3 = getRespuesta(rgPregunta3.checkedRadioButtonId)
+                    Log.d("MainActivity", "Nombre: $nombre, Apellido: $apellido, Email: $email")
 
-                Log.d(
-                    "Respuestas",
-                    "Respuesta 1: $respuesta1, Respuesta 2: $respuesta2, Respuesta 3: $respuesta3"
-                )
+                    val respuesta1 = getRespuesta(rgPregunta1.checkedRadioButtonId)
+                    val respuesta2 = getRespuesta(rgPregunta2.checkedRadioButtonId)
+                    val respuesta3 = getRespuesta(rgPregunta3.checkedRadioButtonId)
 
-                val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
+                    Log.d(
+                        "Respuestas",
+                        "Respuesta 1: $respuesta1, Respuesta 2: $respuesta2, Respuesta 3: $respuesta3"
+                    )
 
-                val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
+                    val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
 
-                datosInversor.edit().putBoolean("estaIngresado", true).apply()
+                    val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
 
-                irAlHome(mensaje)
+                    datosInversor.edit().putBoolean("estaIngresado", true).apply()
+
+                    Log.d("MainActivity", "Mensaje: $mensaje")
+
+                    irAlHome(mensaje)
+                }
             }
         }
 
-        chbTyC.setOnClickListener {
-            val intent = Intent(this, termycond::class.java)
-            startActivity(intent)
+        chbTyC.setOnCheckedChangeListener { _, isChecked ->
+            Log.d("Checkbox", "Checkbox state changed: $isChecked")
+            if (!isChecked) {
+                val intent = Intent(this, termycond::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -102,3 +112,4 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 }
+

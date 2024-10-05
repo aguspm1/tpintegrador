@@ -16,7 +16,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/tvTyC"
@@ -24,22 +25,10 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"/>
     </ScrollView>
-    <RadioGroup
-        android:id="@+id/rgTyC"
+    <Button
+        android:id="@+id/btAtras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <RadioButton
-        android:id="@+id/rbATyC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acepto" />
-
-    <RadioButton
-        android:id="@+id/rbNoaceptar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No acepto"/>
-    </RadioGroup>
+        android:text="Atrás"
+        android:layout_gravity="center"/>
 </LinearLayout>

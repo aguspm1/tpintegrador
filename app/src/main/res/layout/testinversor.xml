@@ -149,7 +149,7 @@
             android:id="@+id/chbTyC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Aceptar Terminos y Condiciones">
+            android:text="Aceptar Terminos y Condiciones">
 
         </CheckBox>
 
