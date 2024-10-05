@@ -144,6 +144,15 @@
                 android:text="D. Más de 2 años." />
         </RadioGroup>
 
+
+        <CheckBox
+            android:id="@+id/chbTyC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Aceptar Terminos y Condiciones">
+
+        </CheckBox>
+
         <Button
             android:id="@+id/btContinuar"
             android:layout_width="match_parent"

@@ -25,6 +25,12 @@
         android:text="Ver Historial de Consultas" />
 
     <Button
+        android:id="@+id/btnTyC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Terminos y Condiciones" />
+
+    <Button
         android:id="@+id/btnSalir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

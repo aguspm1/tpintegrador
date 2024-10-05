@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WelcomeActivity"></activity>
+        <activity android:name=".termycond"></activity>
 
     </application>
 
