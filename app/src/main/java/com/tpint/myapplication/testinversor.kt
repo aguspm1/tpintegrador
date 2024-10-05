@@ -71,6 +71,9 @@ class MainActivity : AppCompatActivity() {
 
                     irAlHome(mensaje)
                 }
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error en btnContinuar.setOnClickListener: ${e.message}")
+                Toast.makeText(this, "Ocurrió un error. Por favor, intenta nuevamente.", Toast.LENGTH_SHORT).show()
             }
         }
 
