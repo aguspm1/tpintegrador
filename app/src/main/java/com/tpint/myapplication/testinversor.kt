@@ -28,58 +28,49 @@ class MainActivity : AppCompatActivity() {
 
         val datosInversor = getSharedPreferences("Inversiones", Context.MODE_PRIVATE)
         val yaIngreso = datosInversor.getBoolean("estaIngresado", false)
-        val TermAceptados = datosInversor.getBoolean("YaAcepto", false)
 
-        Log.d("MainActivity", "TermAceptados: $TermAceptados")  // Log para verificar el valor de TermAceptados
-        chbTyC.isChecked = TermAceptados
+
+        chbTyC.isChecked= false
 
         if (yaIngreso) {
             Toast.makeText(this, "", Toast.LENGTH_LONG).show()
         }
 
         btnContinuar.setOnClickListener {
-            try {
-                if (!chbTyC.isChecked) {
-                    Toast.makeText(
-                        this,
-                        "Debes aceptar los términos y condiciones para continuar",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    val nombre = etNombre.text.toString()
-                    val apellido = etApellido.text.toString()
-                    val email = etEmail.text.toString()
+            val nombre = etNombre.text.toString().trim()
+            val apellido = etApellido.text.toString().trim()
+            val email = etEmail.text.toString().trim()
 
-                    Log.d("MainActivity", "Nombre: $nombre, Apellido: $apellido, Email: $email")
-
-                    val respuesta1 = getRespuesta(rgPregunta1.checkedRadioButtonId)
-                    val respuesta2 = getRespuesta(rgPregunta2.checkedRadioButtonId)
-                    val respuesta3 = getRespuesta(rgPregunta3.checkedRadioButtonId)
-
-                    Log.d(
-                        "Respuestas",
-                        "Respuesta 1: $respuesta1, Respuesta 2: $respuesta2, Respuesta 3: $respuesta3"
-                    )
-
-                    val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
-
-                    val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
-
-                    datosInversor.edit().putBoolean("estaIngresado", true).apply()
-
-                    Log.d("MainActivity", "Mensaje: $mensaje")
-
-                    irAlHome(mensaje)
+            if (nombre.isEmpty() || apellido.isEmpty() || email.isEmpty()) {
+                when {
+                    nombre.isEmpty() -> Toast.makeText(this, "Debes completar el nombre", Toast.LENGTH_SHORT).show()
+                    apellido.isEmpty() -> Toast.makeText(this, "Debes completar el apellido", Toast.LENGTH_SHORT).show()
+                    email.isEmpty() -> Toast.makeText(this, "Debes completar el correo electrónico", Toast.LENGTH_SHORT).show()
                 }
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error en btnContinuar.setOnClickListener: ${e.message}")
-                Toast.makeText(this, "Ocurrió un error. Por favor, intenta nuevamente.", Toast.LENGTH_SHORT).show()
+            } else if (!chbTyC.isChecked) {
+                Toast.makeText(this, "Debes aceptar los términos y condiciones para continuar", Toast.LENGTH_SHORT).show()
+            } else {
+
+                val respuesta1 = getRespuesta(rgPregunta1.checkedRadioButtonId)
+                val respuesta2 = getRespuesta(rgPregunta2.checkedRadioButtonId)
+                val respuesta3 = getRespuesta(rgPregunta3.checkedRadioButtonId)
+
+                Log.d("Respuestas", "Respuesta 1: $respuesta1, Respuesta 2: $respuesta2, Respuesta 3: $respuesta3")
+
+                val tipoInversor = determinarTipo(respuesta1, respuesta2, respuesta3)
+
+                val mensaje = "Holaa $nombre $apellido!\n sos un Inversor $tipoInversor"
+
+                datosInversor.edit().putBoolean("estaIngresado", true).apply()
+
+                Log.d("MainActivity", "Mensaje: $mensaje")
+
+                irAlHome(mensaje)
             }
         }
 
         chbTyC.setOnCheckedChangeListener { _, isChecked ->
-            Log.d("Checkbox", "Checkbox state changed: $isChecked")
-            if (!isChecked) {
+            if (isChecked) {
                 val intent = Intent(this, termycond::class.java)
                 startActivity(intent)
             }
