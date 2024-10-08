@@ -3,31 +3,48 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
+
+
     <LinearLayout
         android:id="@+id/main"
         android:orientation="vertical"
         tools:context=".MainActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+
+        >
+
+        <ImageView
+            android:id="@+id/mi_imagen"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            android:background="#ff5757"/>
 
         <EditText
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"/>
+            android:hint="Nombre"
+            android:textColorHint="#ff5757"/>
 
         <EditText
             android:id="@+id/etApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellido"/>
+            android:hint="Apellido"
+            android:textColorHint="#ff5757"/>
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo Electrónico"/>
+            android:hint="Correo Electrónico"
+            android:textColorHint="#ff5757"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,7 +132,8 @@
             android:id="@+id/rgpregunta3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <RadioButton
                 android:id="@+id/rbp3opcion1"
@@ -149,7 +167,8 @@
             android:id="@+id/chbTyC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aceptar Terminos y Condiciones">
+            android:text="Aceptar Terminos y Condiciones"
+            android:buttonTint="#ff5757">
 
         </CheckBox>
 
@@ -157,7 +176,7 @@
             android:id="@+id/btContinuar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#ff5757"
             android:elevation="8dp"
             android:textSize="16sp"
             android:layout_marginBottom="16dp"
